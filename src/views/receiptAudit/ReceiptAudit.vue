@@ -2,6 +2,7 @@
 <template>
   <div>
     <a-card :bordered="false">
+      <a-switch />
       <div class="table-page-search-wrapper">
         <a-form layout="inline">
           <a-row :gutter="48">
@@ -138,8 +139,9 @@
 </template>
 
 <script>
+import { defineComponent, ref } from 'vue';
 import { STable, Ellipsis } from '@/components'
-import { getFinReceiptOrder, keyValueList } from '@/api/api'
+import { getFinReceiptOrder, keyValueList, getlookup } from '@/api/api'
 export default {
   name: 'ReceiptAudit',
   components: {
@@ -148,6 +150,7 @@ export default {
   },
   data() {
     return {
+      checked: null,
       receiptType: [],
       // 查询参数
       queryParam: {
@@ -251,6 +254,10 @@ export default {
     }
   },
   mounted() {
+    getlookup().then((res) => {
+       console.log(res)
+       console.log('========')
+     })
     keyValueList({ type: 'FIN_PAY_RECEIPT_TYPE' }).then((res) => (this.receiptTypeList = res.result))
 
     keyValueList({ type: 'FIN_PAY_RECEIPT_STATUS_CODE' }).then((res) => (this.receiptStatusList = res.result))

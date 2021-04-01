@@ -1,226 +1,206 @@
 <template>
-  <a-card :bordered="false">
-    <div class="flex-row" style="justify-content: space-between; align-items: center;">
-      <div class="flex-row" style="align-items: center;">
-        <a-avatar shape="square" :size="16" :src="icon[0]" />
-        <span
-          style="
-            color: rgba(0, 0, 0, 0.847058823529412);
-            font-size: 16px;
-            font-family: 'PingFangSC-Regular', 'PingFang SC';
-            font-weight: 400;
-            margin-left: 5px;
-          "
-        >收据</span
-        >
+ <div class="hearder">
+    <div class="a">
+      <div class="a1">
+        <p>收据</p>
+        <p class="a2">——————————————
+        </p>
+        <div>
+          <span>NQ</span><span class="span1">2020207199900001</span>
+        </div>
       </div>
-      <a-button type="primary" @click="print">收据打印</a-button>
-    </div>
-    <div class="flex-column" style="justify-content: center; align-items: center; padding: 24px;">
-      <div id="print-box">
-        <div id="receipt">
-          <div style="width: 1000px; height: 410px; background: #fccce7;">
-            <div class="flex-row" style="justify-content: center; align-items: center; position: relative;">
-              <div style="padding-bottom: 3px; border-bottom: 1px solid black;">
-                <div style="font-size: 32px; padding: 5px 64px; text-align: center; border-bottom: 1px solid black;">
-                  收<span style="margin: 0px 24px;"></span>据
-                </div>
-              </div>
-              <div style="position: absolute; right: 50px; font-size: 32px; bottom: 0px;">
-                NQ<span style="color: #0c47c0;">{{ infoData.receiptNo }}</span>
-              </div>
-            </div>
-            <div class="flex-row" style="padding: 20px 30px 0px; font-size: 18px; position: relative;">
-              <div>单位：XXXXXX有限公司</div>
-              <div style="position: absolute; right: 250px;">{{ infoData.submitDate | localDay }}</div>
-            </div>
-            <div
-              class="flex-column"
-              style="
-                margin: 10px;
-                border: 1.2px solid black;
-                height: 230px;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 18px;
-                font-weight: 400;
-                position: relative;
-              "
-            >
-              <div class="flex-row" style="width: 100%; padding: 20px 10px;">
-                <div class="flex-row">
-                  <span>付款单位</span>
-                  <div style="width: 400px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.payer }}
-                  </div>
-                </div>
-                <div class="flex-row">
-                  <span>付款方式</span>
-                  <div style="width: 394px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.payTypeMeaning }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex-row" style="width: 100%; padding: 20px 10px;">
-                <div class="flex-row">
-                  <span>人民币（大写）</span>
-                  <div style="width: 400px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.receiptMoneyCapital }}
-                  </div>
-                </div>
-                <div class="flex-row">
-                  <span>¥</span>
-                  <div style="width: 400px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.receiptMoney }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex-row" style="width: 100%; padding: 20px 10px;">
-                <span>系付</span>
-                <div style="width: 900px; border-bottom: 1px solid black; padding: 0 20px;">
-                  {{ infoData.receiptTypeMeaning }}，{{ infoData.receiptDesc }}
-                </div>
-              </div>
-              <div
-                style="
-                  position: absolute;
-                  right: 10px;
-                  width: 20px;
-                  margin: 0 auto;
-                  line-height: 24px;
-                  top: 50%;
-                  transform: translateY(-50%);
-                "
-              >
+      <div class="b1">
+        <a-row>
+          <a-col :span="12">单位：xxxx有限公司</a-col>
+          <a-col :span="12">2020年7月19日</a-col>
+        </a-row>
+      </div>
+      <div class="c1">
+        <div class="c2">
+          <a-row>
+            <a-col :span="12">付款单位：财务测试付款人
+              <div class="fukuan">———————————————————————————————————————————</div>
+            </a-col>
+            <a-col :span="10">付款方式 微信支付
+            </a-col>
+          </a-row>
+        </div>
+        <div class="c2">
+          <a-row>
+            <a-col :span="20">人民币（大写）：壹拾元整
+              <div class="ren">—————————————————————————————————————————</div>
+            </a-col>
+            <a-col>
+              <div class="kehu">
                 客户联
               </div>
-            </div>
-            <div class="flex-row-space-around" style="font-size: 18px; padding: 0px 30px;">
-              <div>单位公章：</div>
-              <div>复核人：</div>
-              <div>收款人：</div>
-              <div>制单：李</div>
-            </div>
+            </a-col>
+          </a-row>
+        </div>
+        <div class="c2">
+          <a-row>
+            <a-col :span="24">系付：梯货款，财务部收据描述
+              <div class="xifu">————————————————————————————————————————————</div>
+            </a-col>
+          </a-row>
+        </div>
+      </div>
+      <div class="d1">
+        <a-row :gutter="16">
+          <a-col class="gutter-row" :span="6">
+            <div class="gutter-box">单位公章：</div>
+          </a-col>
+          <a-col class="gutter-row" :span="6">
+            <div class="gutter-box">复核人：</div>
+          </a-col>
+          <a-col class="gutter-row" :span="6">
+            <div class="gutter-box">收款人：</div>
+          </a-col>
+          <a-col class="gutter-row" :span="6">
+            <div class="gutter-box">制单：李</div>
+          </a-col>
+        </a-row>
+      </div>
+    </div>
+    <div class="b">
+      <div class="a">
+        <div class="a1">
+          <p>收据</p>
+          <p class="a2">——————————————
+          </p>
+          <div>
+            <span>NQ</span><span class="span1">2020207199900001</span>
           </div>
-          <div style="width: 1000px; height: 410px; background: #fccce7; margin-top: 50px;">
-            <div class="flex-row" style="justify-content: center; align-items: center; position: relative;">
-              <div style="padding-bottom: 3px; border-bottom: 1px solid black;">
-                <div style="font-size: 32px; padding: 5px 64px; text-align: center; border-bottom: 1px solid black;">
-                  收<span style="margin: 0px 24px;"></span>据
-                </div>
-              </div>
-              <div style="position: absolute; right: 50px; font-size: 32px; bottom: 0px;">
-                NQ<span style="color: #0c47c0;">{{ infoData.receiptNo }}</span>
-              </div>
-            </div>
-            <div class="flex-row" style="padding: 20px 30px 0px; font-size: 18px; position: relative;">
-              <div>单位：XXXXXX有限公司</div>
-              <div style="position: absolute; right: 250px;">{{ infoData.submitDate | localDay }}</div>
-            </div>
-            <div
-              class="flex-column"
-              style="
-                margin: 10px;
-                border: 1.2px solid black;
-                height: 230px;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 18px;
-                font-weight: 400;
-                position: relative;
-              "
-            >
-              <div class="flex-row" style="width: 100%; padding: 20px 10px;">
-                <div class="flex-row">
-                  <span>付款单位</span>
-                  <div style="width: 400px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.payer }}
-                  </div>
-                </div>
-                <div class="flex-row">
-                  <span>付款方式</span>
-                  <div style="width: 394px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.payTypeMeaning }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex-row" style="width: 100%; padding: 20px 10px;">
-                <div class="flex-row">
-                  <span>人民币（大写）</span>
-                  <div style="width: 400px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.receiptMoneyCapital }}
-                  </div>
-                </div>
-                <div class="flex-row">
-                  <span>¥</span>
-                  <div style="width: 400px; border-bottom: 1px solid black; padding: 0 20px;">
-                    {{ infoData.receiptMoney }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex-row" style="width: 100%; padding: 20px 10px;">
-                <span>系付</span>
-                <div style="width: 900px; border-bottom: 1px solid black; padding: 0 20px;">
-                  {{ infoData.receiptTypeMeaning }}，{{ infoData.receiptDesc }}
-                </div>
-              </div>
-              <div
-                style="
-                  position: absolute;
-                  right: 10px;
-                  width: 20px;
-                  margin: 0 auto;
-                  line-height: 24px;
-                  top: 50%;
-                  transform: translateY(-50%);
-                "
-              >
+        </div>
+        <div class="b1">
+          <a-row>
+            <a-col :span="12">单位：xxxx有限公司</a-col>
+            <a-col :span="12">2020年7月19日</a-col>
+          </a-row>
+        </div>
+        <div class="c1">
+          <div class="c2">
+            <a-row>
+              <a-col :span="12">付款单位：财务测试付款人
+                <div class="fukuan">———————————————————————————————————————</div>
+              </a-col>
+              <a-col :span="10">付款方式 微信支付
+              </a-col>
+            </a-row>
+          </div>
+          <div class="c2">
+            <a-row>
+              <a-col :span="12">人民币（大写）：壹拾元整
+                <div class="ren">——————————————————————————————————————</div>
+              </a-col>
+              <div class="kehu2">
                 记账联
               </div>
-            </div>
-            <div class="flex-row-space-around" style="font-size: 18px; padding: 0px 30px;">
-              <div>单位公章：</div>
-              <div>复核人：</div>
-              <div>收款人：</div>
-              <div>制单：李</div>
-            </div>
+            </a-row>
           </div>
+          <div class="c2">
+            <a-row>
+              <a-col :span="24">系付：梯货款，财务部收据描述
+                <div class="xifu">————————————————————————————————————————</div>
+              </a-col>
+            </a-row>
+          </div>
+        </div>
+        <div class="d1">
+          <a-row :gutter="16">
+            <a-col class="gutter-row" :span="6">
+              <div class="gutter-box">单位公章：</div>
+            </a-col>
+            <a-col class="gutter-row" :span="6">
+              <div class="gutter-box">复核人：</div>
+            </a-col>
+            <a-col class="gutter-row" :span="6">
+              <div class="gutter-box">收款人：</div>
+            </a-col>
+            <a-col class="gutter-row" :span="6">
+              <div class="gutter-box">制单：李</div>
+            </a-col>
+          </a-row>
         </div>
       </div>
     </div>
-  </a-card>
+  </div>
 </template>
 
-<script>
-import { exportPDF, toCanvas } from '@/utils/util'
-import { getFinReceiptOrderDetail } from '@/api/api'
-
-export default {
-  name: 'ReceiptPrint',
-  data () {
-    return {
-      icon: [require('@/assets/icons/logo.png')],
-      infoData: {}
-    }
-  },
-  mounted () {
-    if (this.$route.query.receiptNo) {
-      getFinReceiptOrderDetail(this.$route.query.receiptNo).then((res) => {
-        if (['TO_PAY', 'NOT_TRANSFER', 'TRANSFERRED'].includes(res.result.receiptStatus)) {
-          this.infoData = res.result
-          setTimeout(() => {
-            toCanvas('print-box', 'receipt', 1)
-          }, 0)
-        }
-      })
-    }
-  },
-  methods: {
-    print () {
-      exportPDF('receipt', 'receipt')
-    }
-  }
+<style>
+.hearder{
+  width: 1000px;
+  height: 800px;
+  margin: 0px auto;
 }
-</script>
-
-<style scoped></style>
+.a1{
+  height: 20%;
+}
+.a,.b{
+  width: 90%;
+  height: 350px;
+  margin: 100px auto;
+  background-color: palevioletred;
+}
+.a1 p{
+  text-align: center;
+  font-size: 30px;
+}
+.a1 .a2{
+  margin-top: -50px;
+}
+.a1 span{
+position: relative;
+ top: -80px;
+ left: 75%;
+font-size: 20px;
+}
+.span1{
+  color: blue;
+}
+.c1{
+  width: 98%;
+  border: 3px solid #000000;
+  margin: 0px auto;
+}
+.c1 .c2{
+  margin: 20px;
+}
+.b1,.c1,.d1{
+  font-size: 18px;
+}
+.b1,.d1{
+  margin: 15px 20px;
+}
+.xifu{
+position: absolute;
+ top: 12px;
+ left: 5%;
+}
+.ren{
+  position: absolute;
+ top: 12px;
+ left: 15%;
+}
+.fukuan{
+   position: absolute;
+ top: 12px;
+ left: 15%;
+}
+.kehu{
+  margin: 0 auto;
+  width: 20px;
+  line-height: 20px;
+  position: absolute;
+ top: 0px;
+ left: 830px;
+}
+.kehu2{
+  margin: 0 auto;
+  width: 20px;
+  line-height: 20px;
+  position: absolute;
+ top: 0px;
+ left: 750px;
+}
+</style>

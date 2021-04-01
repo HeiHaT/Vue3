@@ -36,8 +36,7 @@
 import { mapActions, mapGetters } from 'vuex'
 // import { isEmpty } from '@/utils/util'
 // import pick from 'lodash.pick'
-// import { keyValueList } from '@/api/api'
-import lookupValue from '@/mock/services/common'
+import { getlookup } from '@/api/api'
 
 export default {
   name: 'Step1',
@@ -46,29 +45,22 @@ export default {
       labelCol: { lg: { span: 5 }, sm: { span: 5 } },
       wrapperCol: { lg: { span: 19 }, sm: { span: 19 } },
       form: this.$form.createForm(this),
-      receiptTypeList: [
-          { 'receiptType': 'STORAGE', 'receiptTypeMeaning': '仓储费' },
-          { 'receiptType': 'PREPAID', 'receiptTypeMeaning': '预付款' },
-          { 'receiptType': 'PICK', 'receiptTypeMeaning': '梯货款' },
-          { 'receiptType': 'CARRY', 'receiptTypeMeaning': '搬运设备' },
-          { 'receiptType': 'UNQUALIFIED', 'receiptTypeMeaning': '不合格品赔偿' },
-          { 'receiptType': 'STAFF', 'receiptTypeMeaning': '员工付款' },
-          { 'receiptType': 'FINE', 'receiptTypeMeaning': '罚款' },
-          { 'receiptType': 'OTHER', 'receiptTypeMeaning': '其他' }], // 收据类型
-      payTypeList: [{ 'payType': 'WEIXIN', 'payTypeMeaning': '微信支付' },
-      { 'payType': 'CASH', 'payTypeMeaning': '现金支付' },
-      { 'payType': 'BANK', 'payTypeMeaning': '银行转账' }] // 支付方式
+      receiptTypeList: null,
+      payTypeList: null
     }
   },
   mounted () {
-      alert(222)
-      lookupValue({ type: 'FIN_PAY_RECEIPT_TYPE' }).then((res) => (this.receiptTypeList = res.result))
+      // alert(222)
+      // eslint-disable-next-line no-undef
+     getlookup({ type: 'FIN_PAY_RECEIPT_TYPE' }).then((res) => (this.receiptTypeList = res.result))
+     getlookup({ type: 'FIN_PAY_RECEIPT_PAY_TYPE' }).then((res) => (this.payTypeList = res.result))
+    //   console.log('========')
     // setTimeout(async () => {
     //   const {
     //     form: { setFieldsValue },
     //     receiptIssuedForm
     //   } = this
-    //   await lookupValue({ type: 'FIN_PAY_RECEIPT_TYPE' }).then((res) => (this.receiptTypeList = res.result))
+    //   await keyValueList({ type: 'FIN_PAY_RECEIPT_TYPE' }).then((res) => (this.receiptTypeList = res.result))
     //   await keyValueList({ type: 'FIN_PAY_RECEIPT_PAY_TYPE' }).then((res) => (this.payTypeList = res.result))
     //   if (!isEmpty(receiptIssuedForm().step1)) {
     //     await setFieldsValue(pick(receiptIssuedForm().step1, ['receiptType', 'payType']))

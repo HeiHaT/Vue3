@@ -140,7 +140,7 @@
 
 <script>
 import { STable, Ellipsis } from '@/components'
-import { getFinReceiptOrder, keyValueList } from '@/api/api'
+// import { getFinReceiptOrder, keyValueList } from '@/api/api'
 import moment from 'moment'
 
 export default {
@@ -211,17 +211,26 @@ export default {
           scopedSlots: { customRender: 'action' }
         }
       ],
-      loadData: (parameter) => {
-        this.queryParam.receiptType = this.receiptType.length ? this.receiptType.join(',') : null
-        return getFinReceiptOrder(Object.assign(this.queryParam, parameter)).then((res) => {
-          return {
-            data: res.result.data,
-            pageNo: parameter.pageNo,
-            pageSize: parameter.pageSize,
-            totalCount: res.result.totalCount
-          }
-        })
-      },
+      loadData: [{
+           index: '1',
+           receiptNo: '10001',
+           receiptTypeMeaning: '不合格产品补偿',
+           receiptMoney: '9300',
+           payTypeMeaning: '现金支付',
+           submitDate: '2021-03-21',
+           receiptStatusMeaning: '代付款'
+      }],
+      // loadData: (parameter) => {
+      //   this.queryParam.receiptType = this.receiptType.length ? this.receiptType.join(',') : null
+      //   return getFinReceiptOrder(Object.assign(this.queryParam, parameter)).then((res) => {
+      //     return {
+      //       data: res.result.data,
+      //       pageNo: parameter.pageNo,
+      //       pageSize: parameter.pageSize,
+      //       totalCount: res.result.totalCount
+      //     }
+      //   })
+      // },
       receiptTypeList: [], // 收据类型列表
       receiptStatusList: [], // 收据状态列表
       options: {
@@ -236,11 +245,11 @@ export default {
     }
   },
   mounted () {
-    keyValueList({ type: 'FIN_PAY_RECEIPT_TYPE' }).then((res) => (this.receiptTypeList = res.result))
+  //   keyValueList({ type: 'FIN_PAY_RECEIPT_TYPE' }).then((res) => (this.receiptTypeList = res.result))
 
-    keyValueList({ type: 'FIN_PAY_RECEIPT_STATUS_CODE' }).then((res) => (this.receiptStatusList = res.result))
+  //   keyValueList({ type: 'FIN_PAY_RECEIPT_STATUS_CODE' }).then((res) => (this.receiptStatusList = res.result))
 
-    keyValueList({ type: 'FIN_PAY_RECEIPT_PAY_TYPE' }).then((res) => (this.payTypeList = res.result))
+  //   keyValueList({ type: 'FIN_PAY_RECEIPT_PAY_TYPE' }).then((res) => (this.payTypeList = res.result))
   },
   methods: {
     onSelectChange (selectedRowKeys, selectedRows) {

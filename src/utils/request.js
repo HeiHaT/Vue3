@@ -13,29 +13,49 @@ const request = axios.create({
 })
 
 // 异常拦截处理器
+// 异常拦截处理器
 const errorHandler = (error) => {
   if (error.response) {
     const data = error.response.data
-    // 从 localstorage 获取 token
     const token = storage.get(ACCESS_TOKEN)
-    if (error.response.status === 403) {
-      notification.error({
-        message: 'Forbidden',
-        description: data.message
-      })
-    }
-    if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
-      notification.error({
-        message: 'Unauthorized',
-        description: 'Authorization verification failed'
-      })
-      if (token) {
-        store.dispatch('Logout').then(() => {
-          setTimeout(() => {
-            window.location.reload()
-          }, 1500)
+    switch (error.response.status) {
+      case 403:
+        notification.error({ message: '系统提示', description: '拒绝访问', duration: 4 })
+        break
+      case 500:
+        notification.error({ message: '系统提示', description: '服务器异常', duration: 4 })
+        break
+      case 404:
+        notification.error({ message: '系统提示', description: '很抱歉，资源未找到!', duration: 4 })
+        break
+      case 504:
+        notification.error({ message: '系统提示', description: '网络超时' })
+        break
+      case 401:
+        notification.error({ message: '系统提示', description: '未授权，请重新登录', duration: 4 })
+        if (token) {
+          // eslint-disable-next-line no-undef
+          Modal.error({
+            title: '未授权，请重新登录',
+            content: '很抱歉，未授权，请重新登录',
+            okText: '重新登录',
+            mask: false,
+            onOk: () => {
+              store.dispatch('Logout').then()
+            }
+          })
+        }
+        break
+      case 700:
+        notification.error({ message: '系统提示', description: error.response.data.error, duration: 4 })
+        break
+      default:
+        notification.error({
+          message: '系统提示',
+          description: data.message,
+          duration: 4
         })
-      }
+        break
     }
   }
   return Promise.reject(error)
